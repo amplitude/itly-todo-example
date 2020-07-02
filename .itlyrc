@@ -28,6 +28,18 @@
       ],
     },
     {
+      id: '9df75462-3736-4a9e-9e00-46b504555be2',
+      name: 'Todo Toggled',
+      description: 'Called when a todo is toggled.',
+      properties: [],
+      sources: [
+        {
+          id: '465da460-bb6b-4cda-8ac0-05d758544e75',
+          name: 'web',
+        },
+      ],
+    },
+    {
       id: '2a656e32-0e2b-4a0c-8132-9750768101be',
       name: 'Todos Cleared',
       description: 'Called when todos are cleared.',

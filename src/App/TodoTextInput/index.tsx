@@ -5,7 +5,6 @@ import { useAppState } from '@laststance/use-app-state'
 import { Container } from './style'
 import itly from '../../itly'
 
-
 const TodoTextInput: React.FC = () => {
   const [appState, setAppState] = useAppState<AppState>()
   const textInput = createRef<HTMLInputElement>()
@@ -26,6 +25,7 @@ const TodoTextInput: React.FC = () => {
       setAppState({ todoList: [todo, ...appState.todoList] })
 
       itly.todoCreated();
+      console.log("toodCreated")
 
       // reset text input UI value
       textInput.current.value = ''
