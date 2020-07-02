@@ -11,9 +11,7 @@ import itly, {
 } from '@itly/sdk';
 import SchemaValidatorPlugin from '@itly/plugin-schema-validator';
 import IterativelyPlugin, { IterativelyOptions as BaseIterativelyOptions } from '@itly/plugin-iteratively';
-import SegmentPlugin, { SegmentOptions } from '@itly/plugin-segment';
 import AmplitudePlugin, { AmplitudeOptions } from '@itly/plugin-amplitude';
-import MixpanelPlugin, { MixpanelOptions } from '@itly/plugin-mixpanel';
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 type WithOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
@@ -26,148 +24,16 @@ export type ValidationOptions = BaseValidationOptions;
 export type ValidationResponse = BaseValidationResponse;
 export type IterativelyOptions = WithOptional<BaseIterativelyOptions, 'url' | 'environment'>;
 
-export interface ContextProperties {
-  /**
-   * description for context requiredString
-   */
-  requiredString: string;
-  /**
-   * description for context optionalEnum
-   */
-  optionalEnum?: "Value 1" | "Value 2";
-}
 export interface IdentifyProperties {
   /**
-   * Description for identify optionalArray
+   * The first name of the user.
    */
-  optionalArray?: string[];
-  /**
-   * Description for identify requiredNumber
-   */
-  requiredNumber: number;
+  first_name: string;
 }
-export interface GroupProperties {
-  /**
-   * Description for group requiredBoolean
-   */
-  requiredBoolean: boolean;
-  /**
-   * Description for group optionalString
-   */
-  optionalString?: string;
-}
-export interface EventWithOptionalPropertiesProperties {
-  /**
-   * | Rule | Value |
-   * |---|---|
-   * | Type | number |
-   */
-  optionalNumber?: number;
-  /**
-   * | Rule | Value |
-   * |---|---|
-   * | Item Type | string |
-   */
-  optionalArrayString?: string[];
-  /**
-   * | Rule | Value |
-   * |---|---|
-   * | Item Type | number |
-   */
-  optionalArrayNumber?: number[];
-  /**
-   * Optional String property description
-   */
-  optionalString?: string;
-  optionalBoolean?: boolean;
-}
-export interface EventNoPropertiesProperties {}
-export interface EventWithAllPropertiesProperties {
-  /**
-   * Event 2 Property - Const
-   *
-   * | Rule | Value |
-   * |---|---|
-   * | Const value | some-const-value |
-   */
-  requiredConst: {
-    [k: string]: any;
-  };
-  /**
-   * Event 2 Property - Integer    *     * Examples:    * 5, 4, 3
-   *
-   * | Rule | Value |
-   * |---|---|
-   * | Type | integer |
-   */
-  requiredInteger: number;
-  /**
-   * Event 2 Property - Optional String    *     * Examples:    * Some string, or another
-   */
-  optionalString?: string;
-  /**
-   * Event 2 Property - Number
-   *
-   * | Rule | Value |
-   * |---|---|
-   * | Type | number |
-   */
-  requiredNumber: number;
-  /**
-   * Event 2 Property - String
-   */
-  requiredString: string;
-  /**
-   * Event 2 Property - Array
-   *
-   * | Rule | Value |
-   * |---|---|
-   * | Min Items | 0 |
-   * | Item Type | string |
-   */
-  requiredArray: string[];
-  /**
-   * Event 2 Property - Enum
-   *
-   * | Rule | Value |
-   * |---|---|
-   * | Enum Values | Enum1, Enum2 |
-   */
-  requiredEnum: "Enum1" | "Enum2";
-  /**
-   * Event 2 Property - Boolean
-   */
-  requiredBoolean: boolean;
-}
-export interface EventMaxIntForTestProperties {
-  /**
-   * property to test schema validation
-   *
-   * | Rule | Value |
-   * |---|---|
-   * | Type | integer |
-   * | Max Value | 10 |
-   */
-  intMax10: number;
-}
-export interface EventObjectTypesProperties {
-  /**
-   * Property Object Type
-   */
-  requiredObject: {
-    [k: string]: any;
-  };
-  /**
-   * Property Object Array Type
-   *
-   * | Rule | Value |
-   * |---|---|
-   * | Item Type | object |
-   */
-  requiredObjectArray: {
-    [k: string]: any;
-  }[];
-}
+export interface TodoDeletedProperties {}
+export interface TodosClearedProperties {}
+export interface TodoCreatedProperties {}
+export interface TodosToggledProperties {}
 
 export interface Options extends BaseOptions {
   /**
@@ -175,14 +41,8 @@ export interface Options extends BaseOptions {
    */
   destinations?: {
     iteratively?: IterativelyOptions,
-    segment?: SegmentOptions,
-    amplitude?: AmplitudeOptions,
-    mixpanel?: MixpanelOptions
+    amplitude?: AmplitudeOptions
   };
-  /**
-   * Additional context properties to add to all events. Default is none.
-   */
-  context: ContextProperties;
 }
 
 
@@ -197,37 +57,24 @@ class Itly {
 
     itly.load({ ...baseOptions, plugins: [
       new IterativelyPlugin(options.environment === 'production'
-        ? '5J--hWBlXUX9IEsBSVe3z5A6N3-Ah-Rr'
-        : 'jH-eGAT3RIvzu6BHQXKfoVY2ijS7E6_-',
+        ? 'VwZgWTU0u2D9uimAkwIxya0dOXAFW1dE'
+        : 'taQpDYJgWpeIVOclkolEm0EHBs4zo1LJ',
       {
-        url: 'https://api-test.iterative.ly/t/version/79154a50-f057-4db5-9755-775e4e9f05e6',
+        url: 'https://api.iterative.ly/t/version/d4c79bb0-7abf-4f17-a1c2-29a27844b9f1',
         environment: options.environment || 'development',
         ...destinations.iteratively,
       }),
       new SchemaValidatorPlugin({
-        'context': {"$id":"https://iterative.ly/company/77b37977-cb3a-42eb-bce3-09f5f7c3adb7/context","$schema":"http://json-schema.org/draft-07/schema#","title":"Context","description":"","type":"object","properties":{"requiredString":{"description":"description for context requiredString","type":"string"},"optionalEnum":{"description":"description for context optionalEnum","enum":["Value 1","Value 2"]}},"additionalProperties":false,"required":["requiredString"]},
-        'group': {"$id":"https://iterative.ly/company/77b37977-cb3a-42eb-bce3-09f5f7c3adb7/group","$schema":"http://json-schema.org/draft-07/schema#","title":"Group","description":"","type":"object","properties":{"requiredBoolean":{"description":"Description for group requiredBoolean","type":"boolean"},"optionalString":{"description":"Description for group optionalString","type":"string"}},"additionalProperties":false,"required":["requiredBoolean"]},
-        'identify': {"$id":"https://iterative.ly/company/77b37977-cb3a-42eb-bce3-09f5f7c3adb7/identify","$schema":"http://json-schema.org/draft-07/schema#","title":"Identify","description":"","type":"object","properties":{"optionalArray":{"description":"Description for identify optionalArray","type":"array","uniqueItems":false,"items":{"type":"string"}},"requiredNumber":{"description":"Description for identify requiredNumber","type":"number"}},"additionalProperties":false,"required":["requiredNumber"]},
-        'Event No Properties': {"$id":"https://iterative.ly/company/77b37977-cb3a-42eb-bce3-09f5f7c3adb7/event/26af925a-be3a-40e5-947d-33da66a5352f/version/1.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Event No Properties","description":"Event w no properties description","type":"object","properties":{},"additionalProperties":false,"required":[]},
-        'Event Object Types': {"$id":"https://iterative.ly/company/77b37977-cb3a-42eb-bce3-09f5f7c3adb7/event/aea72ecc-5a10-4bd7-99a6-81a464aabaed/version/1.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Event Object Types","description":"Event with Object and Object Array","type":"object","properties":{"requiredObject":{"description":"Property Object Type","type":"object"},"requiredObjectArray":{"description":"Property Object Array Type","type":"array","items":{"type":"object"}}},"additionalProperties":false,"required":["requiredObject","requiredObjectArray"]},
-        'Event With All Properties': {"$id":"https://iterative.ly/company/77b37977-cb3a-42eb-bce3-09f5f7c3adb7/event/311ba144-8532-4474-a9bd-8b430625e29a/version/1.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Event With All Properties","description":"Event w all properties description","type":"object","properties":{"requiredConst":{"description":"Event 2 Property - Const","const":"some-const-value"},"requiredInteger":{"description":"Event 2 Property - Integer    *     * Examples:    * 5, 4, 3","type":"integer"},"optionalString":{"description":"Event 2 Property - Optional String    *     * Examples:    * Some string, or another","type":"string"},"requiredNumber":{"description":"Event 2 Property - Number","type":"number"},"requiredString":{"description":"Event 2 Property - String","type":"string"},"requiredArray":{"description":"Event 2 Property - Array","type":"array","minItems":0,"items":{"type":"string"}},"requiredEnum":{"description":"Event 2 Property - Enum","enum":["Enum1","Enum2"]},"requiredBoolean":{"description":"Event 2 Property - Boolean","type":"boolean"}},"additionalProperties":false,"required":["requiredConst","requiredInteger","requiredNumber","requiredString","requiredArray","requiredEnum","requiredBoolean"]},
-        'Event With Optional Properties': {"$id":"https://iterative.ly/company/77b37977-cb3a-42eb-bce3-09f5f7c3adb7/event/00b99136-9d1a-48d8-89d5-25f165ff3ae0/version/1.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Event With Optional Properties","description":"Event w optional properties description","type":"object","properties":{"optionalNumber":{"description":"","type":"number"},"optionalArrayString":{"description":"","type":"array","items":{"type":"string"}},"optionalArrayNumber":{"description":"","type":"array","items":{"type":"number"}},"optionalString":{"description":"Optional String property description","type":"string"},"optionalBoolean":{"description":"","type":"boolean"}},"additionalProperties":false,"required":[]},
-        'EventMaxIntForTest': {"$id":"https://iterative.ly/company/77b37977-cb3a-42eb-bce3-09f5f7c3adb7/event/aa0f08ac-8928-4569-a524-c1699e7da6f4/version/1.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"EventMaxIntForTest","description":"Event to test schema validation","type":"object","properties":{"intMax10":{"description":"property to test schema validation","type":"integer","maximum":10}},"additionalProperties":false,"required":["intMax10"]},
+        'identify': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/identify","$schema":"http://json-schema.org/draft-07/schema#","title":"Identify","description":"","type":"object","properties":{"first_name":{"description":"The first name of the user.","type":"string"}},"additionalProperties":false,"required":["first_name"]},
+        'Todo Created': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/5a12a386-91a9-47e4-91fc-52d93bbfcd78/version/3.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Todo Created","description":"Called when a todo is created.","type":"object","properties":{},"additionalProperties":false,"required":[]},
+        'Todo Deleted': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/047da53e-da2f-4aed-8e4c-81ce3a61a42a/version/3.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Todo Deleted","description":"Called when a todo is deleted.","type":"object","properties":{},"additionalProperties":false,"required":[]},
+        'Todos Cleared': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/2a656e32-0e2b-4a0c-8132-9750768101be/version/3.0.1","$schema":"http://json-schema.org/draft-07/schema#","title":"Todos Cleared","description":"Called when todos are cleared.","type":"object","properties":{},"additionalProperties":false,"required":[]},
+        'Todos Toggled': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/9e894aac-5921-40c1-befd-07be5d343962/version/1.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Todos Toggled","description":"Called when todos are toggled.","type":"object","properties":{},"additionalProperties":false,"required":[]},
       }),
-      new SegmentPlugin(options.environment === 'production'
-        ? 'CvU1TXIk6zSKuN7Vyx3FMT7cqzyvY5th'
-        : 'CvU1TXIk6zSKuN7Vyx3FMT7cqzyvY5th',
-        destinations.segment,
-      ),
       new AmplitudePlugin(options.environment === 'production'
-        ? '6c3a9cd0a22daafe3278346608a816cf'
-        : '6c3a9cd0a22daafe3278346608a816cf',
+        ? '08ed2d4a871a818f51a11d5cf406b322'
+        : '08ed2d4a871a818f51a11d5cf406b322',
         destinations.amplitude,
-      ),
-      new MixpanelPlugin(options.environment === 'production'
-        ? '67a8ece0a81e35124d7c23c06b04c52f'
-        : '67a8ece0a81e35124d7c23c06b04c52f',
-        destinations.mixpanel,
       ),
       ...plugins,
     ] });
@@ -251,8 +98,8 @@ class Itly {
     itly.identify(userId, properties)
   }
 
-  group(groupId: string, properties: GroupProperties) {
-    itly.group(groupId, properties)
+  group(groupId: string) {
+    itly.group(groupId)
   }
   
   page(category: string, name: string) {
@@ -260,76 +107,58 @@ class Itly {
   }
 
   /**
-   * Event w optional properties description
+   * Called when a todo is deleted.
    * 
-   * Owner: Test codegen
-   * @param properties The event's properties (e.g. optionalNumber)
+   * Owner: Patrick Thompson
    */
-  eventWithOptionalProperties(properties: EventWithOptionalPropertiesProperties) {
+  todoDeleted() {
     itly.track({
-      name: 'Event With Optional Properties',
-      id: '00b99136-9d1a-48d8-89d5-25f165ff3ae0',
-      version: '1.0.0',
-      properties: properties,
-    });
-  }
-
-  /**
-   * Event w no properties description
-   * 
-   * Owner: Test codegen
-   */
-  eventNoProperties() {
-    itly.track({
-      name: 'Event No Properties',
-      id: '26af925a-be3a-40e5-947d-33da66a5352f',
-      version: '1.0.0',
+      name: 'Todo Deleted',
+      id: '047da53e-da2f-4aed-8e4c-81ce3a61a42a',
+      version: '3.0.0',
       properties: undefined,
     });
   }
 
   /**
-   * Event w all properties description
+   * Called when todos are cleared.
    * 
-   * Owner: Test codegen
-   * @param properties The event's properties (e.g. requiredConst)
+   * Owner: Patrick Thompson
    */
-  eventWithAllProperties(properties: EventWithAllPropertiesProperties) {
+  todosCleared() {
     itly.track({
-      name: 'Event With All Properties',
-      id: '311ba144-8532-4474-a9bd-8b430625e29a',
-      version: '1.0.0',
-      properties: properties,
+      name: 'Todos Cleared',
+      id: '2a656e32-0e2b-4a0c-8132-9750768101be',
+      version: '3.0.1',
+      properties: undefined,
     });
   }
 
   /**
-   * Event to test schema validation
+   * Called when a todo is created.
    * 
-   * Owner: Test codegen
-   * @param properties The event's properties (e.g. intMax10)
+   * Owner: Patrick Thompson
    */
-  eventMaxIntForTest(properties: EventMaxIntForTestProperties) {
+  todoCreated() {
     itly.track({
-      name: 'EventMaxIntForTest',
-      id: 'aa0f08ac-8928-4569-a524-c1699e7da6f4',
-      version: '1.0.0',
-      properties: properties,
+      name: 'Todo Created',
+      id: '5a12a386-91a9-47e4-91fc-52d93bbfcd78',
+      version: '3.0.0',
+      properties: undefined,
     });
   }
 
   /**
-   * Event with Object and Object Array
+   * Called when todos are toggled.
    * 
-   * Owner: Test codegen
-   * @param properties The event's properties (e.g. requiredObject)
+   * Owner: Patrick Thompson
    */
-  eventObjectTypes(properties: EventObjectTypesProperties) {
+  todosToggled() {
     itly.track({
-      name: 'Event Object Types',
-      id: 'aea72ecc-5a10-4bd7-99a6-81a464aabaed',
+      name: 'Todos Toggled',
+      id: '9e894aac-5921-40c1-befd-07be5d343962',
       version: '1.0.0',
-      properties: properties,
+      properties: undefined,
     });
   }
   

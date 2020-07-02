@@ -3,6 +3,7 @@ import { Routes, Todo, AppState } from '../../index'
 import Item from './Item'
 import { useAppState } from '@laststance/use-app-state'
 import { Container } from './style'
+import itly from '../../itly'
 
 interface Props {
   path: Routes
@@ -13,6 +14,7 @@ const TodoList: React.FC<Props> = ({ path }) => {
 
   function toggleAllCheckbox(e: React.ChangeEvent<HTMLInputElement>): void { /* eslint-disable-line prettier/prettier */
     // reverse all todo.completed: boolean flag
+    itly.todosToggled();
     setAppState({ todoList: appState.todoList.map((t: Todo): Todo => ({ ...t, completed: e.target.checked })) }) /* eslint-disable-line prettier/prettier */
   }
 
