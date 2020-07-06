@@ -14,7 +14,7 @@ const TodoList: React.FC<Props> = ({ path }) => {
 
   function toggleAllCheckbox(e: React.ChangeEvent<HTMLInputElement>): void { /* eslint-disable-line prettier/prettier */
     // reverse all todo.completed: boolean flag
-    itly.todosToggled();
+    itly.todosToggled()
     setAppState({ todoList: appState.todoList.map((t: Todo): Todo => ({ ...t, completed: e.target.checked })) }) /* eslint-disable-line prettier/prettier */
   }
 

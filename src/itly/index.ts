@@ -12,6 +12,7 @@ import itly, {
 import SchemaValidatorPlugin from '@itly/plugin-schema-validator';
 import IterativelyPlugin, { IterativelyOptions as BaseIterativelyOptions } from '@itly/plugin-iteratively';
 import AmplitudePlugin, { AmplitudeOptions } from '@itly/plugin-amplitude';
+import MixpanelPlugin, { MixpanelOptions } from '@itly/plugin-mixpanel';
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 type WithOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
@@ -42,7 +43,8 @@ export interface Options extends BaseOptions {
    */
   destinations?: {
     iteratively?: IterativelyOptions,
-    amplitude?: AmplitudeOptions
+    amplitude?: AmplitudeOptions,
+    mixpanel?: MixpanelOptions
   };
 }
 
@@ -61,7 +63,7 @@ class Itly {
         ? 'VwZgWTU0u2D9uimAkwIxya0dOXAFW1dE'
         : 'taQpDYJgWpeIVOclkolEm0EHBs4zo1LJ',
       {
-        url: 'https://api.iterative.ly/t/version/94c87aa5-80fa-4008-b931-e5b2623985f5',
+        url: 'https://api.iterative.ly/t/version/bda5fe8b-e846-413f-a0ab-7d3c88ca9abf',
         environment: options.environment || 'development',
         ...destinations.iteratively,
       }),
@@ -77,6 +79,11 @@ class Itly {
         ? '08ed2d4a871a818f51a11d5cf406b322'
         : '08ed2d4a871a818f51a11d5cf406b322',
         destinations.amplitude,
+      ),
+      new MixpanelPlugin(options.environment === 'production'
+        ? '95e9671ce73b2f05d8c3180780c43cd9'
+        : '95e9671ce73b2f05d8c3180780c43cd9',
+        destinations.mixpanel,
       ),
       ...plugins,
     ] });

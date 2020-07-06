@@ -24,8 +24,7 @@ const TodoTextInput: React.FC = () => {
       // add new TODO to entire TodoList
       setAppState({ todoList: [todo, ...appState.todoList] })
 
-      itly.todoCreated();
-      console.log("toodCreated")
+      itly.todoCreated()
 
       // reset text input UI value
       textInput.current.value = ''

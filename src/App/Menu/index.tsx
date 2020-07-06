@@ -15,7 +15,7 @@ const Menu: React.FC<Props> = ({ path }) => {
   const yetCount: number = appState.todoList.filter(t => t.completed === false).length /* eslint-disable-line prettier/prettier */
 
   function clearCompleted(): void {
-    itly.todosCleared();
+    itly.todosCleared()
     setAppState({
       todoList: appState.todoList.filter((t: Todo) => !t.completed),
     })

@@ -20,6 +20,8 @@ const Item: React.FC<Props> = ({ todo }) => {
 
   const onDoubleClick = (): void => {
     setState({ onEdit: true })
+
+    // Add modify here
   }
 
   const onBlurEdit = (e: React.FocusEvent<HTMLInputElement>): void => {
@@ -68,8 +70,8 @@ const Item: React.FC<Props> = ({ todo }) => {
     })
 
     setAppState({ todoList: toggled })
-    
-    itly.todoToggled();
+
+    itly.todoToggled()
   }
 
   const removeItem = (terminate: Todo['id']): void => {
@@ -79,7 +81,7 @@ const Item: React.FC<Props> = ({ todo }) => {
 
     setAppState({ todoList: removed })
 
-    itly.todoDeleted();
+    itly.todoDeleted()
   }
 
   const handleTodoTextEdit = (e: React.ChangeEvent<HTMLInputElement>, onEdit: Todo['id']): void => { /* eslint-disable-line prettier/prettier */
