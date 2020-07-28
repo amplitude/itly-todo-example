@@ -20,8 +20,6 @@ const Item: React.FC<Props> = ({ todo }) => {
 
   const onDoubleClick = (): void => {
     setState({ onEdit: true })
-
-    // Add modify here
   }
 
   const onBlurEdit = (e: React.FocusEvent<HTMLInputElement>): void => {

@@ -9,7 +9,7 @@ import ErrorBoundary from './ErrorBoundary'
 import { NotFound } from './NotFound'
 import itly from './itly'
 
-itly.load({ environment: 'development' })
+itly.load({ environment: 'development', context: {foo : true} })
 
 export type Routes = '/' | '/active' | '/completed'
 

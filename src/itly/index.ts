@@ -36,7 +36,7 @@ export interface TodosClearedProperties {}
 export interface TodoCreatedProperties {}
 export interface TodoToggledProperties {}
 export interface TodosToggledProperties {}
-
+// prettier-ignore
 export interface Options extends BaseOptions {
   /**
    * Analytics provider-specific configuration. Default is null.
@@ -50,6 +50,7 @@ export interface Options extends BaseOptions {
 
 
 
+// prettier-ignore
 class Itly {
   load(options: Options) {
     const {
@@ -63,7 +64,7 @@ class Itly {
         ? 'VwZgWTU0u2D9uimAkwIxya0dOXAFW1dE'
         : 'taQpDYJgWpeIVOclkolEm0EHBs4zo1LJ',
       {
-        url: 'https://api.iterative.ly/t/version/bda5fe8b-e846-413f-a0ab-7d3c88ca9abf',
+        url: 'https://api.iterative.ly/t/version/44219f7b-f6d3-43b2-a9d8-3793a8f61f8e',
         environment: options.environment || 'development',
         ...destinations.iteratively,
       }),
