@@ -63,15 +63,16 @@ class Itly {
       new IterativelyPlugin(options.environment === 'production'
         ? 'VwZgWTU0u2D9uimAkwIxya0dOXAFW1dE'
         : 'taQpDYJgWpeIVOclkolEm0EHBs4zo1LJ',
-      {
-        url: 'https://api.iterative.ly/t/version/44219f7b-f6d3-43b2-a9d8-3793a8f61f8e',
-        environment: options.environment || 'development',
-        ...destinations.iteratively,
-      }),
+        {
+          url: 'https://api.iterative.ly/t/version/eb44a8ff-e46a-4b8a-90f4-920d39d47638',
+          environment: options.environment || 'development',
+          ...destinations.iteratively,
+        },
+      ),
       new SchemaValidatorPlugin({
         'identify': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/identify","$schema":"http://json-schema.org/draft-07/schema#","title":"Identify","description":"","type":"object","properties":{"first_name":{"description":"The first name of the user.","type":"string"}},"additionalProperties":false,"required":["first_name"]},
-        'Todo Created': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/5a12a386-91a9-47e4-91fc-52d93bbfcd78/version/3.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Todo Created","description":"Called when a todo is created.","type":"object","properties":{},"additionalProperties":false,"required":[]},
-        'Todo Deleted': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/047da53e-da2f-4aed-8e4c-81ce3a61a42a/version/3.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Todo Deleted","description":"Called when a todo is deleted.","type":"object","properties":{},"additionalProperties":false,"required":[]},
+        'Todo Created': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/5a12a386-91a9-47e4-91fc-52d93bbfcd78/version/5.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Todo Created","description":"Called when a todo is created.","type":"object","properties":{},"additionalProperties":false,"required":[]},
+        'Todo Deleted': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/047da53e-da2f-4aed-8e4c-81ce3a61a42a/version/3.0.1","$schema":"http://json-schema.org/draft-07/schema#","title":"Todo Deleted","description":"Called when a todo is deleted.","type":"object","properties":{},"additionalProperties":false,"required":[]},
         'Todo Toggled': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/9df75462-3736-4a9e-9e00-46b504555be2/version/1.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Todo Toggled","description":"Called when a todo is toggled.","type":"object","properties":{},"additionalProperties":false,"required":[]},
         'Todos Cleared': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/2a656e32-0e2b-4a0c-8132-9750768101be/version/3.0.1","$schema":"http://json-schema.org/draft-07/schema#","title":"Todos Cleared","description":"Called when todos are cleared.","type":"object","properties":{},"additionalProperties":false,"required":[]},
         'Todos Toggled': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/9e894aac-5921-40c1-befd-07be5d343962/version/1.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Todos Toggled","description":"Called when todos are toggled.","type":"object","properties":{},"additionalProperties":false,"required":[]},
@@ -119,13 +120,13 @@ class Itly {
   /**
    * Called when a todo is deleted.
    * 
-   * Owner: Patrick Thompson
+   * Owner: Ondrej Hrebicek
    */
   todoDeleted() {
     itly.track({
       name: 'Todo Deleted',
       id: '047da53e-da2f-4aed-8e4c-81ce3a61a42a',
-      version: '3.0.0',
+      version: '3.0.1',
       properties: undefined,
     });
   }
@@ -153,7 +154,7 @@ class Itly {
     itly.track({
       name: 'Todo Created',
       id: '5a12a386-91a9-47e4-91fc-52d93bbfcd78',
-      version: '3.0.0',
+      version: '5.0.0',
       properties: undefined,
     });
   }
@@ -184,6 +185,10 @@ class Itly {
       version: '1.0.0',
       properties: undefined,
     });
+  }
+
+  track(event: Event) {
+    itly.track(event);
   }
   
   reset() {
