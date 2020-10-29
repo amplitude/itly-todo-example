@@ -4,6 +4,8 @@ import Provider, { useAppState } from '@laststance/use-app-state'
 import '@testing-library/jest-dom'
 import Item from './index'
 import { AppState } from '../../../index'
+import itly, { TodoDeleted, TodoToggled } from '../../../itly'
+import ItlyTestPlugin from '@itly/plugin-testing'
 
 const initialAppState: AppState = {
   todoList: [
@@ -14,6 +16,19 @@ const initialAppState: AppState = {
     },
   ],
 }
+
+const itlyTestPlugin = new ItlyTestPlugin()
+
+beforeAll(() => {
+  itly.load({
+    destinations: { all: { disabled: true } },
+    plugins: [itlyTestPlugin],
+  })
+})
+
+beforeEach(() => {
+  itlyTestPlugin.reset()
+})
 
 const App = () => {
   const [appState] = useAppState<AppState>()
@@ -41,6 +56,8 @@ test('should each initialAppstate todo object value is set to Item element', () 
   expect((getByTestId('todo-edit-input') as HTMLInputElement).value).toBe(
     'cut tomato'
   )
+
+  expect(itlyTestPlugin.all()).toHaveLength(0)
 })
 
 test('should set css classes correctly', () => {
@@ -53,6 +70,8 @@ test('should set css classes correctly', () => {
   // when not.completed & not.onEdit, SwitchStyle doesn't show .completed .editting selectors
   expect(getByTestId('todo-item')).not.toHaveClass('completed')
   expect(getByTestId('todo-item')).not.toHaveClass('editing')
+
+  expect(itlyTestPlugin.all()).toHaveLength(0)
 })
 
 test('should work todo completed checkbox', () => {
@@ -75,6 +94,9 @@ test('should work todo completed checkbox', () => {
     (getByTestId('todo-item-complete-check') as HTMLInputElement).checked
   ).toBe(false)
   expect(getByTestId('todo-item')).not.toHaveClass('completed')
+
+  expect(itlyTestPlugin.all()).toHaveLength(2)
+  expect(itlyTestPlugin.all()).toEqual([new TodoToggled(), new TodoToggled()])
 })
 
 test('should work edit mode and toggle show/hide', () => {
@@ -103,6 +125,11 @@ test('should work edit mode and toggle show/hide', () => {
   expect(getByTestId('todo-body-text')).toHaveTextContent('cut tomato plus')
   expect(getByTestId('todo-item')).not.toHaveClass('editing')
   expect(getByTestId('todo-edit-input')).not.toBeVisible()
+
+  // expect(itlyTestPlugin.all()).toHaveLength(1)
+  // expect(itlyTestPlugin.all()).toEqual([
+  //   new TodoModified({ todo_id: initialAppState.todoList[0].id }),
+  // ])
 })
 
 test('delete todo item', () => {
@@ -116,4 +143,7 @@ test('delete todo item', () => {
   expect(getByTestId('todo-item')).toBeInTheDocument()
   fireEvent.click(getByTestId('delete-todo-btn'))
   expect(queryByTestId('todo-item')).toBe(null)
+
+  expect(itlyTestPlugin.all()).toHaveLength(1)
+  expect(itlyTestPlugin.all()).toEqual([new TodoDeleted()])
 })

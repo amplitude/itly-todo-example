@@ -4,6 +4,8 @@ import Provider from '@laststance/use-app-state'
 import '@testing-library/jest-dom'
 import TodoList from './index'
 import { AppState } from '../../index'
+import itly, { TodoDeleted, TodosToggled } from '../../itly'
+import ItlyPluginTest from '@itly/plugin-testing'
 
 const initialAppState: AppState = {
   todoList: [
@@ -25,6 +27,19 @@ const initialAppState: AppState = {
   ],
 }
 
+const itlyTestPlugin = new ItlyPluginTest()
+
+beforeAll(() => {
+  itly.load({
+    destinations: { all: { disabled: true } },
+    plugins: [itlyTestPlugin],
+  })
+})
+
+beforeEach(() => {
+  itlyTestPlugin.reset()
+})
+
 test('should be render 3 todo items in initialAppState', () => {
   const { getByTestId, getAllByTestId } = render(
     <Provider appState={initialAppState}>
@@ -38,6 +53,8 @@ test('should be render 3 todo items in initialAppState', () => {
   expect(getAllByTestId('todo-item')[0]).toHaveTextContent('monster')
   expect(getAllByTestId('todo-item')[1]).toHaveTextContent('boss black')
   expect(getAllByTestId('todo-item')[2]).toHaveTextContent('caffe latte')
+
+  expect(itlyTestPlugin.all()).toHaveLength(0)
 })
 
 test('should be work delete todo button', () => {
@@ -54,6 +71,9 @@ test('should be work delete todo button', () => {
   expect(Array.isArray(getAllByTestId('todo-item'))).toBe(true)
   expect(getAllByTestId('todo-item')[0]).toHaveTextContent('boss black')
   expect(getAllByTestId('todo-item')[1]).toHaveTextContent('caffe latte')
+
+  expect(itlyTestPlugin.all()).toHaveLength(1)
+  expect(itlyTestPlugin.all()).toEqual([new TodoDeleted()])
 })
 
 test('should be work correctly all completed:true|false checkbox toggle button', () => {
@@ -76,4 +96,7 @@ test('should be work correctly all completed:true|false checkbox toggle button',
   expect((getAllByTestId('todo-item-complete-check')[0] as HTMLInputElement).checked).toBe(false) /* eslint-disable-line prettier/prettier */
   expect((getAllByTestId('todo-item-complete-check')[1] as HTMLInputElement).checked).toBe(false) /* eslint-disable-line prettier/prettier */
   expect((getAllByTestId('todo-item-complete-check')[2] as HTMLInputElement).checked).toBe(false) /* eslint-disable-line prettier/prettier */
+
+  expect(itlyTestPlugin.all()).toHaveLength(2)
+  expect(itlyTestPlugin.all()).toEqual([new TodosToggled(), new TodosToggled()])
 })

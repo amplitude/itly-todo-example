@@ -30,6 +30,7 @@
     "@itly/plugin-mixpanel": "^1.4.0",
     "@itly/plugin-schema-validator": "^1.4.0",
     "@itly/plugin-segment": "^1.4.0",
+    "@itly/plugin-testing": "^1.4.0",
     "@itly/sdk": "^1.4.0",
     "@laststance/use-app-state": "^1.2.6",
     "@reach/router": "^1.3.3",

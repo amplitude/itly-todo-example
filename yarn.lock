@@ -1236,6 +1236,11 @@
   resolved "https://registry.yarnpkg.com/@itly/plugin-segment/-/plugin-segment-1.4.0.tgz#96bbae5cbf7f7babccdfb3bdb2600b97feded942"
   integrity sha512-FyZc6sUY1LBeGFhK0edP2cAff/c1Jm6pGyQbFJMxE9mPQqNKjEHACcgAoL/dPrC+hIeab2noj03IzkunnfPV6g==
 
+"@itly/plugin-testing@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@itly/plugin-testing/-/plugin-testing-1.4.0.tgz#5b1cb0550a025ea8f39a5be90f65ab56b3ff5be1"
+  integrity sha512-QW/zJThG5xrBfqsrRHFWyKounfjdmDTqueaK4cwfos2wKSmt0/S7PWhvpiQJRs7WYcoG1NolgAkALra6YIR3Mw==
+
 "@itly/sdk@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@itly/sdk/-/sdk-1.4.0.tgz#9f0685e72de473d84762b6fd355fd8c837555573"
