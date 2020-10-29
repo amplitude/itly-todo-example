@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import itly, {
+  Environment,
   Options as BaseOptions,
   Event as BaseEvent,
   Properties as BaseProperties,
@@ -36,15 +37,65 @@ export interface TodosClearedProperties {}
 export interface TodoCreatedProperties {}
 export interface TodoToggledProperties {}
 export interface TodosToggledProperties {}
+
+export class TodoDeleted implements Event {
+  name = 'Todo Deleted';
+  id = '047da53e-da2f-4aed-8e4c-81ce3a61a42a';
+  version = '3.0.1';
+}
+
+export class TodosCleared implements Event {
+  name = 'Todos Cleared';
+  id = '2a656e32-0e2b-4a0c-8132-9750768101be';
+  version = '3.0.1';
+}
+
+export class TodoCreated implements Event {
+  name = 'Todo Created';
+  id = '5a12a386-91a9-47e4-91fc-52d93bbfcd78';
+  version = '5.0.0';
+}
+
+export class TodoToggled implements Event {
+  name = 'Todo Toggled';
+  id = '9df75462-3736-4a9e-9e00-46b504555be2';
+  version = '1.0.0';
+}
+
+export class TodosToggled implements Event {
+  name = 'Todos Toggled';
+  id = '9e894aac-5921-40c1-befd-07be5d343962';
+  version = '1.0.0';
+}
+
 // prettier-ignore
-export interface Options extends BaseOptions {
+export interface Options {
+  /**
+   * The current environment (development or production). Default is development.
+   */
+  environment?: Environment;
+  /**
+   * Whether calls to the Itly SDK should be no-ops. Default is false.
+   */
+  disabled?: boolean;
+  /**
+   * Analytics provider-specific configuration. Default is null.
+   */
+  plugins?: Plugin[];
+  /**
+   * Configure validation handling
+   */
+  validation?: ValidationOptions;
   /**
    * Analytics provider-specific configuration. Default is null.
    */
   destinations?: {
-    iteratively?: IterativelyOptions,
-    amplitude?: AmplitudeOptions,
-    mixpanel?: MixpanelOptions
+    iteratively?: IterativelyOptions;
+    amplitude?: AmplitudeOptions;
+    mixpanel?: MixpanelOptions;
+    all?: {
+      disabled?: boolean;
+    };
   };
 }
 
@@ -59,45 +110,62 @@ class Itly {
       ...baseOptions
     } = options;
 
-    itly.load({ ...baseOptions, plugins: [
-      new IterativelyPlugin(options.environment === 'production'
-        ? 'VwZgWTU0u2D9uimAkwIxya0dOXAFW1dE'
-        : 'taQpDYJgWpeIVOclkolEm0EHBs4zo1LJ',
-      {
-        url: 'https://api.iterative.ly/t/version/44219f7b-f6d3-43b2-a9d8-3793a8f61f8e',
-        environment: options.environment || 'development',
-        ...destinations.iteratively,
-      }),
+    const allDestinationsEnabled = !(destinations.all && destinations.all.disabled);
+    const itlyPlugins = [];
+
+    if (allDestinationsEnabled) {
+      itlyPlugins.push(
+        new IterativelyPlugin(options.environment === 'production'
+          ? 'VwZgWTU0u2D9uimAkwIxya0dOXAFW1dE'
+          : 'taQpDYJgWpeIVOclkolEm0EHBs4zo1LJ',
+          {
+            url: 'https://api.iterative.ly/t/version/f1e36383-3778-422a-9038-84a130a4a8b0',
+            environment: options.environment || 'development',
+            ...destinations.iteratively,
+          },
+        )
+      );
+    }
+
+    itlyPlugins.push(
       new SchemaValidatorPlugin({
         'identify': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/identify","$schema":"http://json-schema.org/draft-07/schema#","title":"Identify","description":"","type":"object","properties":{"first_name":{"description":"The first name of the user.","type":"string"}},"additionalProperties":false,"required":["first_name"]},
-        'Todo Created': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/5a12a386-91a9-47e4-91fc-52d93bbfcd78/version/3.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Todo Created","description":"Called when a todo is created.","type":"object","properties":{},"additionalProperties":false,"required":[]},
-        'Todo Deleted': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/047da53e-da2f-4aed-8e4c-81ce3a61a42a/version/3.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Todo Deleted","description":"Called when a todo is deleted.","type":"object","properties":{},"additionalProperties":false,"required":[]},
+        'Todo Created': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/5a12a386-91a9-47e4-91fc-52d93bbfcd78/version/5.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Todo Created","description":"Called when a todo is created.","type":"object","properties":{},"additionalProperties":false,"required":[]},
+        'Todo Deleted': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/047da53e-da2f-4aed-8e4c-81ce3a61a42a/version/3.0.1","$schema":"http://json-schema.org/draft-07/schema#","title":"Todo Deleted","description":"Called when a todo is deleted.","type":"object","properties":{},"additionalProperties":false,"required":[]},
         'Todo Toggled': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/9df75462-3736-4a9e-9e00-46b504555be2/version/1.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Todo Toggled","description":"Called when a todo is toggled.","type":"object","properties":{},"additionalProperties":false,"required":[]},
         'Todos Cleared': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/2a656e32-0e2b-4a0c-8132-9750768101be/version/3.0.1","$schema":"http://json-schema.org/draft-07/schema#","title":"Todos Cleared","description":"Called when todos are cleared.","type":"object","properties":{},"additionalProperties":false,"required":[]},
         'Todos Toggled': {"$id":"https://iterative.ly/company/44a66378-180b-4593-8031-e5c4538d9380/event/9e894aac-5921-40c1-befd-07be5d343962/version/1.0.0","$schema":"http://json-schema.org/draft-07/schema#","title":"Todos Toggled","description":"Called when todos are toggled.","type":"object","properties":{},"additionalProperties":false,"required":[]},
-      }),
-      new AmplitudePlugin(options.environment === 'production'
-        ? '08ed2d4a871a818f51a11d5cf406b322'
-        : '08ed2d4a871a818f51a11d5cf406b322',
-        destinations.amplitude,
-      ),
-      new MixpanelPlugin(options.environment === 'production'
-        ? '95e9671ce73b2f05d8c3180780c43cd9'
-        : '95e9671ce73b2f05d8c3180780c43cd9',
-        destinations.mixpanel,
-      ),
-      ...plugins,
-    ] });
+      })
+    );
+
+    if (allDestinationsEnabled) {
+      itlyPlugins.push(
+        new AmplitudePlugin(options.environment === 'production'
+          ? '08ed2d4a871a818f51a11d5cf406b322'
+          : '08ed2d4a871a818f51a11d5cf406b322',
+          destinations.amplitude,
+        ),
+        new MixpanelPlugin(options.environment === 'production'
+          ? '95e9671ce73b2f05d8c3180780c43cd9'
+          : '95e9671ce73b2f05d8c3180780c43cd9',
+          destinations.mixpanel,
+        )
+      );
+    }
+
+    itlyPlugins.push(...plugins);
+
+    itly.load({ ...baseOptions, plugins: itlyPlugins });
   }
 
   /**
-    * Alias a user ID to another user ID.
-    * @param userId The user's new ID.
-    * @param previousId The user's previous ID.
-    */
-    alias(userId: string, previousId?: string) {
-      itly.alias(userId, previousId);
-    }
+  * Alias a user ID to another user ID.
+  * @param userId The user's new ID.
+  * @param previousId The user's previous ID.
+  */
+  alias(userId: string, previousId?: string) {
+    itly.alias(userId, previousId);
+  }
 
   /**
   * Set or update a user's properties.
@@ -111,7 +179,7 @@ class Itly {
   group(groupId: string) {
     itly.group(groupId)
   }
-  
+
   page(category: string, name: string) {
     itly.page(category, name);
   }
@@ -119,15 +187,10 @@ class Itly {
   /**
    * Called when a todo is deleted.
    * 
-   * Owner: Patrick Thompson
+   * Owner: Ondrej Hrebicek
    */
   todoDeleted() {
-    itly.track({
-      name: 'Todo Deleted',
-      id: '047da53e-da2f-4aed-8e4c-81ce3a61a42a',
-      version: '3.0.0',
-      properties: undefined,
-    });
+    itly.track(new TodoDeleted());
   }
 
   /**
@@ -136,12 +199,7 @@ class Itly {
    * Owner: Patrick Thompson
    */
   todosCleared() {
-    itly.track({
-      name: 'Todos Cleared',
-      id: '2a656e32-0e2b-4a0c-8132-9750768101be',
-      version: '3.0.1',
-      properties: undefined,
-    });
+    itly.track(new TodosCleared());
   }
 
   /**
@@ -150,12 +208,7 @@ class Itly {
    * Owner: Patrick Thompson
    */
   todoCreated() {
-    itly.track({
-      name: 'Todo Created',
-      id: '5a12a386-91a9-47e4-91fc-52d93bbfcd78',
-      version: '3.0.0',
-      properties: undefined,
-    });
+    itly.track(new TodoCreated());
   }
 
   /**
@@ -164,12 +217,7 @@ class Itly {
    * Owner: Patrick Thompson
    */
   todoToggled() {
-    itly.track({
-      name: 'Todo Toggled',
-      id: '9df75462-3736-4a9e-9e00-46b504555be2',
-      version: '1.0.0',
-      properties: undefined,
-    });
+    itly.track(new TodoToggled());
   }
 
   /**
@@ -178,14 +226,13 @@ class Itly {
    * Owner: Patrick Thompson
    */
   todosToggled() {
-    itly.track({
-      name: 'Todos Toggled',
-      id: '9e894aac-5921-40c1-befd-07be5d343962',
-      version: '1.0.0',
-      properties: undefined,
-    });
+    itly.track(new TodosToggled());
   }
-  
+
+  track(event: Event) {
+    itly.track(event);
+  }
+
   reset() {
     itly.reset();
   }
