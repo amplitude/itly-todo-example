@@ -1,6 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import itly, {
+  Environment,
   Options as BaseOptions,
   Event as BaseEvent,
   Properties as BaseProperties,
@@ -37,7 +38,23 @@ export interface TodoCreatedProperties {}
 export interface TodoToggledProperties {}
 export interface TodosToggledProperties {}
 // prettier-ignore
-export interface Options extends BaseOptions {
+export interface Options {
+  /**
+   * The current environment (development or production). Default is development.
+   */
+  environment?: Environment;
+  /**
+   * Whether calls to the Itly SDK should be no-ops. Default is false.
+   */
+  disabled?: boolean;
+  /**
+   * Analytics provider-specific configuration. Default is null.
+   */
+  plugins?: Plugin[];
+  /**
+   * Configure validation handling
+   */
+  validation?: ValidationOptions;
   /**
    * Analytics provider-specific configuration. Default is null.
    */
@@ -64,7 +81,7 @@ class Itly {
         ? 'VwZgWTU0u2D9uimAkwIxya0dOXAFW1dE'
         : 'taQpDYJgWpeIVOclkolEm0EHBs4zo1LJ',
         {
-          url: 'https://api.iterative.ly/t/version/eb44a8ff-e46a-4b8a-90f4-920d39d47638',
+          url: 'https://api.iterative.ly/t/version/f1e36383-3778-422a-9038-84a130a4a8b0',
           environment: options.environment || 'development',
           ...destinations.iteratively,
         },
