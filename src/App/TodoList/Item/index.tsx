@@ -19,6 +19,7 @@ const Item: React.FC<Props> = ({ todo }) => {
   const [state, setState] = useState(init)
 
   const onDoubleClick = (): void => {
+    // TODO: add tracking!
     setState({ onEdit: true })
   }
 

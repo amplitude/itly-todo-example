@@ -1,8 +1,15 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import ErrorBoundary from './ErrorBoundary'
+import itly from './itly'
 
 import '@testing-library/jest-dom'
+
+beforeAll(() => {
+  itly.load({
+    destinations: { all: { disabled: true } },
+  })
+})
 
 test('should be render fallback page Error was thrown', () => {
   const InvalidComponent = () => undefined

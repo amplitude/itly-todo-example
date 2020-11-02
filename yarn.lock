@@ -1209,37 +1209,42 @@
   dependencies:
     "@hapi/hoek" "^8.3.0"
 
-"@itly/plugin-amplitude@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@itly/plugin-amplitude/-/plugin-amplitude-1.1.1.tgz#4941a829dc08cb36286bc51a96e4e012e502d144"
-  integrity sha512-UXSiIQgS6AeBnFByqLhadzvITsol6/NX0PF/jvi8o7AY7DSxAyLjiWdUIvhdaKGnjkRHqCVV/h0J4K9KujADCw==
+"@itly/plugin-amplitude@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@itly/plugin-amplitude/-/plugin-amplitude-1.4.0.tgz#b4c433f5871d9175b27f1b8f5d6a915c6eef5d45"
+  integrity sha512-B4nrvw81L2AfhJjAJiyrpy6kW10AFpRgUSDbj8JSbtt+yPGWZuPwVQA7Sbzt9vJlGiNR93qD2+86J2MLDQpRjQ==
 
-"@itly/plugin-iteratively@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@itly/plugin-iteratively/-/plugin-iteratively-1.1.1.tgz#dc5aae2147848496f88037691f579454c98ceb7c"
-  integrity sha512-1nY41WopWNoGQfhXIjgJ4qZrUtq5ixO1TMpquETICfQHRKnSrKVvG6/YlVtgPm33V+i/khiCvipObSYfnHJUQA==
+"@itly/plugin-iteratively@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@itly/plugin-iteratively/-/plugin-iteratively-1.4.0.tgz#256ddb75862a288cf8978db1abe5ba335f2d9838"
+  integrity sha512-Xg+d47J1xSbObzhj+cuZv3vJO8pfp3RJ250za2KLHBY0pCZCihm0dgf5QK0giDMVCiT7kNHK+MGRl/7jlgnu0Q==
 
-"@itly/plugin-mixpanel@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@itly/plugin-mixpanel/-/plugin-mixpanel-1.1.1.tgz#3cb0373247de9e4037734a05493e45a1e9c81f7e"
-  integrity sha512-XtKwUuQNxcudrgQCVKuqpYeMv0zLYj5FDBUqxrDr0JTNq0HZVMAMgqJhPByL6pz5jQJjYQWXixjcJd74s5rFyw==
+"@itly/plugin-mixpanel@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@itly/plugin-mixpanel/-/plugin-mixpanel-1.4.0.tgz#ce3890d95540e85c8139e8c808d28bbe5b925fa3"
+  integrity sha512-zR0gX3XsR4t8Lbcxzhq7jvrUVq00crOZF/5U4r1zWA2Px0TFtC3Pq++5ZXdsMwUf9nRQeX2sBgWdkJwJulJaGw==
 
-"@itly/plugin-schema-validator@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@itly/plugin-schema-validator/-/plugin-schema-validator-1.1.1.tgz#6a4c788ad9afb08f28eb957011b0fe055397b69c"
-  integrity sha512-fS8Ikx2Ono3h9q0FLcWlvpI5Fe1eXVv0jsRdVRllZkPUPN4q4tiQUtB9mzTZVHCLRJVIyR70TBSFN1ySMSLxuw==
+"@itly/plugin-schema-validator@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@itly/plugin-schema-validator/-/plugin-schema-validator-1.4.0.tgz#a54fa714d69c4e2c0fb93fe9d3a4c520932ee303"
+  integrity sha512-jb8h+OasY90HxMnIJeVjZYWQqWsOgogdhlQSaYuVA/3RwBNchqhwAsvcxUmfvx2bi6uVruzd2Bvi7UAOGpZb3A==
   dependencies:
     ajv "^6.12.2"
 
-"@itly/plugin-segment@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@itly/plugin-segment/-/plugin-segment-1.1.1.tgz#294c22786fbf4974d20fc6a0a009809d302aff07"
-  integrity sha512-gkDvISdVojD3IOhWIau341ES4EZDdyBiwvf+HCrP04DNkMH0/onrnQvYdL2C3TNGmtpqwIr5rklIUi9GV9pWVQ==
+"@itly/plugin-segment@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@itly/plugin-segment/-/plugin-segment-1.4.0.tgz#96bbae5cbf7f7babccdfb3bdb2600b97feded942"
+  integrity sha512-FyZc6sUY1LBeGFhK0edP2cAff/c1Jm6pGyQbFJMxE9mPQqNKjEHACcgAoL/dPrC+hIeab2noj03IzkunnfPV6g==
 
-"@itly/sdk@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@itly/sdk/-/sdk-1.1.1.tgz#b9645e193725dba96430be43d6ca5cd238ccd26a"
-  integrity sha512-5k6GVPmLpLKCMtQJIAde3M2+vP+R/8uCHtBgYasR9XCbIKRUsm1ojLZxQNOvtDvNHJ112MAqlWTkP+J+FQyW8g==
+"@itly/plugin-testing@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@itly/plugin-testing/-/plugin-testing-1.4.0.tgz#5b1cb0550a025ea8f39a5be90f65ab56b3ff5be1"
+  integrity sha512-QW/zJThG5xrBfqsrRHFWyKounfjdmDTqueaK4cwfos2wKSmt0/S7PWhvpiQJRs7WYcoG1NolgAkALra6YIR3Mw==
+
+"@itly/sdk@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@itly/sdk/-/sdk-1.4.0.tgz#9f0685e72de473d84762b6fd355fd8c837555573"
+  integrity sha512-BgSLwUbxosZMSf4DguYZV5nugJMkabZyKy2Adz370ewfqr+eBJu2fI+52bKL5bgqo4+P5eYouMqZqaicW7+Yrg==
 
 "@jest/console@^24.7.1", "@jest/console@^24.9.0":
   version "24.9.0"
@@ -2035,10 +2040,20 @@ ajv-keywords@^3.1.0, ajv-keywords@^3.4.1:
   resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-3.4.1.tgz#ef916e271c64ac12171fd8384eaae6b2345854da"
   integrity sha512-RO1ibKvd27e6FEShVFfPALuHI3WjSVNeK5FIsmme/LYRNxjKuNj+Dt7bucLa6NdSv3JcVTyMlm9kGR84z1XpaQ==
 
-ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.12.2, ajv@^6.5.5:
+ajv@^6.1.0, ajv@^6.10.0, ajv@^6.10.2, ajv@^6.5.5:
   version "6.12.2"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.2.tgz#c629c5eced17baf314437918d2da88c99d5958cd"
   integrity sha512-k+V+hzjm5q/Mr8ef/1Y9goCmlsK4I6Sm74teeyGvFk1XrOsbsKLjEdrvny42CZ+a8sXbk8KWpY/bDwS+FLL2UQ==
+  dependencies:
+    fast-deep-equal "^3.1.1"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.4.1"
+    uri-js "^4.2.2"
+
+ajv@^6.12.2:
+  version "6.12.6"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.6.tgz#baf5a62e802b07d977034586f8c3baf5adf26df4"
+  integrity sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==
   dependencies:
     fast-deep-equal "^3.1.1"
     fast-json-stable-stringify "^2.0.0"
@@ -10597,9 +10612,9 @@ upath@^1.1.1:
   integrity sha512-aZwGpamFO61g3OlfT7OQCHqhGnW43ieH9WZeP7QxN/G/jS4jfqUkZxoryvJgVPEcrl5NL/ggHsSmLMHuH64Lhg==
 
 uri-js@^4.2.2:
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/uri-js/-/uri-js-4.2.2.tgz#94c540e1ff772956e2299507c010aea6c8838eb0"
-  integrity sha512-KY9Frmirql91X2Qgjry0Wd4Y+YTdrdZheS8TFwvkbLWf/G5KNJDCh6pKL5OZctEW4+0Baa5idK2ZQuELRwPznQ==
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/uri-js/-/uri-js-4.4.0.tgz#aa714261de793e8a82347a7bcc9ce74e86f28602"
+  integrity sha512-B0yRTzYdUCCn9n+F4+Gh4yIDtMQcaJsmYBDsTSG8g/OejKBodLQ2IHfN3bM7jUsRXndopT7OIXWdYqc1fjmV6g==
   dependencies:
     punycode "^2.1.0"
 
