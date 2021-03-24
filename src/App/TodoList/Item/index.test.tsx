@@ -126,9 +126,10 @@ test('should work edit mode and toggle show/hide', () => {
   expect(getByTestId('todo-item')).not.toHaveClass('editing')
   expect(getByTestId('todo-edit-input')).not.toBeVisible()
 
-  // expect(itlyTestPlugin.all()).toHaveLength(1)
   // expect(itlyTestPlugin.all()).toEqual([
-  //   new TodoModified({ todo_id: initialAppState.todoList[0].id }),
+  //   new TodoModified({
+  //     todo_id: initialAppState.todoList[0].id,
+  //   }),
   // ])
 })
 
