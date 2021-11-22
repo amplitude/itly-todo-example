@@ -3,7 +3,6 @@ import FilterLink from './FilterLink'
 import { Routes, Todo, AppState } from '../../index'
 import { useAppState } from '@laststance/use-app-state'
 import { Container } from './style'
-import itly from '../../itly'
 
 interface Props {
   path: Routes
@@ -15,7 +14,7 @@ const Menu: React.FC<Props> = ({ path }) => {
   const yetCount: number = appState.todoList.filter(t => t.completed === false).length /* eslint-disable-line prettier/prettier */
 
   function clearCompleted(): void {
-    itly.todosCleared()
+    // TODO: add tracking!
     setAppState({
       todoList: appState.todoList.filter((t: Todo) => !t.completed),
     })

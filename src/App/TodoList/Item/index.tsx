@@ -2,7 +2,6 @@ import React, { useState, createRef, useEffect } from 'react'
 import { AppState, Todo, TodoListType } from '../../../index'
 import { useAppState } from '@laststance/use-app-state'
 import { Container } from './style'
-import itly from '../../../itly'
 
 interface Props {
   todo: Todo
@@ -70,7 +69,7 @@ const Item: React.FC<Props> = ({ todo }) => {
 
     setAppState({ todoList: toggled })
 
-    itly.todoToggled()
+    // TODO: add tracking!
   }
 
   const removeItem = (terminate: Todo['id']): void => {
@@ -80,7 +79,7 @@ const Item: React.FC<Props> = ({ todo }) => {
 
     setAppState({ todoList: removed })
 
-    itly.todoDeleted()
+    // TODO: add tracking!
   }
 
   const handleTodoTextEdit = (e: React.ChangeEvent<HTMLInputElement>, onEdit: Todo['id']): void => { /* eslint-disable-line prettier/prettier */

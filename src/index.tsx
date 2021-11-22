@@ -7,9 +7,8 @@ import * as serviceWorker from './serviceWorker'
 import App, { LocalStorageKey } from './App'
 import ErrorBoundary from './ErrorBoundary'
 import { NotFound } from './NotFound'
-import itly from './itly'
 
-itly.load({ environment: 'development' })
+// itly.load({ environment: 'development' })
 
 export type Routes = '/' | '/active' | '/completed'
 
