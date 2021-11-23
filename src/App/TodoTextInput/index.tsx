@@ -3,7 +3,6 @@ import { UUID } from '../../functions'
 import { Todo, AppState } from '../../index'
 import { useAppState } from '@laststance/use-app-state'
 import { Container } from './style'
-import itly from '../../itly'
 
 const TodoTextInput: React.FC = () => {
   const [appState, setAppState] = useAppState<AppState>()
@@ -24,7 +23,7 @@ const TodoTextInput: React.FC = () => {
       // add new TODO to entire TodoList
       setAppState({ todoList: [todo, ...appState.todoList] })
 
-      itly.todoCreated()
+      // TODO: add tracking!
 
       // reset text input UI value
       textInput.current.value = ''
